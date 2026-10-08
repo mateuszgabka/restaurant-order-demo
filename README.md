@@ -6,7 +6,7 @@ A modern, high-performance web application for managing restaurant orders, menu 
 
 ## 🚀 Live Demo
 
-* **Frontend:** [https://api-ro.gabkastudio.pl/](https://rorder.gabkastudio.pl/)
+* **Frontend:** [https://rorder.gabkastudio.pl/](https://rorder.gabkastudio.pl/)
 * **API Backend:** [https://api-ro.gabkastudio.pl/](https://api-ro.gabkastudio.pl/)
 
 ---
