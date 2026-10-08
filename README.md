@@ -1,17 +1,17 @@
-# 🍽️ Restaurant Order System
+# Restaurant Order System
 
 A modern, high-performance web application for managing restaurant orders, menu categories, and products in real time. Built with **Angular 19** utilizing cutting-edge features like **Signals**, **Standalone Components**, and **OnPush Change Detection Strategy**.
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 * **Frontend:** [https://rorder.gabkastudio.pl/](https://rorder.gabkastudio.pl/)
 * **API Backend:** [https://api-ro.gabkastudio.pl/](https://api-ro.gabkastudio.pl/)
 
 ---
 
-## 📸 Overview & Features
+## Overview & Features
 ![Dashboard Overview](./screenshots/dashboard.png)
 
 ### Key Features:
@@ -23,7 +23,7 @@ A modern, high-performance web application for managing restaurant orders, menu 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Frontend Framework:** Angular 19 (Signals, Standalone Components, `computed`, `signal`, RxJS, HttpClient)
 * **Styling:** Tailwind CSS
