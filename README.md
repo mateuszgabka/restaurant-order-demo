@@ -1,59 +1,31 @@
-# RestaurantOrder
+# 🍽️ Restaurant Admin Panel
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+A modern, high-performance web application for managing restaurant orders, menu categories, and products in real time. Built with **Angular 19** utilizing cutting-edge features like **Signals**, **Standalone Components**, and **OnPush Change Detection Strategy**.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Live Demo
 
-```bash
-ng serve
-```
+* **Frontend:** [https://api-ro.gabkastudio.pl/](https://rorder.gabkastudio.pl/)
+* **API Backend:** [https://api-ro.gabkastudio.pl/](https://api-ro.gabkastudio.pl/)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 📸 Overview & Features
+![Dashboard Overview](./screenshots/dashboard.png)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Key Features:
+* **Real-time Order Management:** Dynamic sorting and filtering of customer orders using reactive computed signals.
+* **Product & Category Management:** Interactive drag-and-drop / selection interfaces for managing restaurant offerings.
+* **Optimized UI/UX:** Clean, responsive user interface styled with **Tailwind CSS** featuring custom dynamic status tinting.
+* **Standalone Architecture:** Modern Angular structure without `NgModule` overhead, ensuring clean dependency injection and fast load times.
+* **OnPush Performance:** Optimized change detection strategy across components to minimize unnecessary re-renders.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🛠️ Tech Stack
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* **Frontend Framework:** Angular 19 (Signals, Standalone Components, `computed`, `signal`, RxJS, HttpClient)
+* **Styling:** Tailwind CSS
+* **Backend:** Node.js + `json-server` (v0.17.4) running as a dedicated sub-application
+* **Hosting & Server Setup:** Apache (SPA routing via `.htaccess`) + Node.js environment
