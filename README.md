@@ -1,4 +1,4 @@
-# 🍽️ Restaurant Admin Panel
+# 🍽️ Restaurant Order System
 
 A modern, high-performance web application for managing restaurant orders, menu categories, and products in real time. Built with **Angular 19** utilizing cutting-edge features like **Signals**, **Standalone Components**, and **OnPush Change Detection Strategy**.
 
