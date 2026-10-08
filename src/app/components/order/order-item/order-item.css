@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.product-name svg {
+  width: 12px;
+  cursor: pointer;
+  display: inline-block;
+  transition: opacity 0.3s ease-out;
+  opacity: 0.7;
+}
+
+.product-name svg:hover {
+  opacity: 1;
+}

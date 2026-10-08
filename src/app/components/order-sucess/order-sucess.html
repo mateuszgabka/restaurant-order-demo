@@ -1,0 +1,95 @@
+<div class="max-w-4xl mx-auto mt-6 p-6 sm:p-8 lg:p-10 bg-slate-900 text-slate-100 rounded-2xl shadow-xl border border-slate-800  my-8">
+    
+    <!-- Confirmation Header -->
+    <div class="mb-8 border-b border-slate-700 pb-4">
+        <h2 class="text-3xl font-extrabold text-amber-500 tracking-wider">Order Confirmation</h2>
+        <p class="text-lg text-slate-300 mt-1">Your order has been successfully placed!</p>
+        <p class="text-sm text-slate-400">Order Date: {{ order?.createdAt | date: 'medium' }}</p>
+    </div>
+
+    <!-- SUMMARY CONTENT CONTAINER -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- COLUMN 1: ITEMS & TOTAL (The core summary) -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- 1. ORDER ITEMS LIST -->
+            <div class="p-5 bg-slate-800/70 rounded-xl shadow-inner border border-slate-700">
+                <h3 class="text-xl font-bold mb-4 text-slate-200">Items Ordered</h3>
+                
+                <!-- Placeholder for Items List (Repeatable component using *ngFor) -->
+                <div class="space-y-3">
+                    @for (item of order?.items; track item) {
+                        <div class="flex justify-between items-center text-sm py-2 border-b border-slate-700 last:border-b-0">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-amber-500">{{ getProductName(item.productId) }}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-medium mr-3">{{ item.quantity }}x {{ getProductPrice(item.productId) | currency: 'USD' }}</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- 2. DETAILED FINANCIAL SUMMARY -->
+            <div class="p-5 bg-slate-800/70 rounded-xl shadow-inner border border-slate-700">
+                <h3 class="text-xl font-bold mb-4 text-slate-200">Payment Summary</h3>
+                
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between items-center pt-3 text-xl font-extrabold text-amber-500 border-t border-amber-600">
+                        <span>Total Amount:</span>
+                        <span class="text-amber-400">{{ this.orderService.getTotalAmount() | currency:'USD':'symbol' }}</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-2 text-sm">
+                        <span class="text-slate-300">Payment Method:</span>
+                        <span class="font-medium text-amber-500">{{ order?.customer?.paymentMethod ? order?.customer?.paymentMethod : '' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMN 2: CONTACT & ADDRESS (Sidebar details) -->
+        <div class="lg:col-span-1 space-y-6">
+            
+            <!-- 3. CONTACT DETAILS -->
+            <div class="p-5 bg-slate-800/70 rounded-xl shadow-inner border border-slate-700">
+                <h3 class="text-xl font-bold mb-4 text-slate-200">Customer Details</h3>
+                <div class="space-y-3 text-sm">
+                    <div class="flex flex-col">
+                        <span class="text-slate-400">Name:</span>
+                        <p class="font-semibold text-lg text-amber-500">{{ order?.customer?.customer?.firstName }} {{ order?.customer?.customer?.lastName }}</p>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-slate-400">Phone:</span>
+                        <p class="font-semibold">{{ order?.customer?.customer?.phone }}</p>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-slate-400">Email:</span>
+                        <p class="font-semibold">{{ order?.customer?.customer?.email }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. DELIVERY ADDRESS -->
+            <div class="p-5 bg-slate-800/70 rounded-xl shadow-inner border border-slate-700">
+                <h3 class="text-xl font-bold mb-4 text-slate-200">Delivery Address</h3>
+                <div class="space-y-2 text-sm">
+                    <p class="text-slate-300"><strong>Street:</strong> {{ order?.customer?.address?.street }}</p>
+                    <p class="text-slate-300"><strong>Building/Apt:</strong> {{ order?.customer?.address?.buildingNumber }}</p>
+                    <p class="text-slate-300"><strong>ZIP Code:</strong> {{ order?.customer?.address?.zipCode }}</p>
+                    <p class="text-slate-300"><strong>City:</strong> {{ order?.customer?.address?.city }}</p>
+                </div>
+                <p class="mt-4 text-xs italic text-amber-400 border-t border-slate-700 pt-3">Notes: {{ order?.customer?.notes }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CALL TO ACTION / FOOTER -->
+    <div class="mt-10 pt-6 border-t border-slate-700 flex justify-between items-center">
+        <button (click)="router.navigate(['/'])" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2 px-6 rounded-xl transition shadow-lg">
+            Back to Main Page
+        </button>
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+<section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-xl font-bold text-slate-100 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                Products
+            </h2>
+            <p class="text-slate-400 text-sm mt-1">Select a category, arrange dishes and edit the menu</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <!-- Wybór kategorii do filtrowania/sortowania -->
+            <select [ngModel]="selectedCategoryId()" (ngModelChange)="onSelectCategory($event)"
+                class="bg-slate-800 border border-slate-700 text-slate-200 text-sm px-4 py-2 rounded-xl focus:outline-none focus:border-amber-500">
+                @for (cat of categoriesService.categories(); track cat.id) {
+                <option [value]="cat.id">{{ cat.name }}</option>
+                }
+            </select>
+
+            <!-- Przycisk Dodaj Produkt -->
+            <button (click)="showAddProduct = !showAddProduct"
+                class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm rounded-xl transition shadow-lg shadow-emerald-600/20 flex items-center gap-2 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                <span>New Product in {{ currentCategoryName() }}</span>
+            </button>
+        </div>
+        <app-admin-product-edit (cancelProduct)="onProductCancel($event)" [showStatus]="showAddProduct" [category]="selectedCategoryId()"></app-admin-product-edit>
+    </div>
+
+    <div cdkDropList (cdkDropListDropped)="onProductDrop($any($event))" class="space-y-3">
+        @for (product of filteredProducts(); track product.id) {
+            <app-admin-product-item cdkDrag [product]="product"></app-admin-product-item>
+        }
+    </div>
+</section>

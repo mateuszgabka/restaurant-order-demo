@@ -1,0 +1,31 @@
+<section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-xl font-bold text-slate-100 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                Categories
+            </h2>
+            <p class="text-slate-400 text-sm mt-1">Drag items with the handle to change their order on the page</p>
+        </div>
+
+        <button (click)="showAddCategory = !showAddCategory"
+            class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm rounded-xl transition shadow-lg shadow-blue-600/20 flex items-center gap-2 whitespace-nowrap">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span>New category</span>
+        </button>
+        <app-admin-categories-edit (cancelCategory)="onCategoryCancel($event)" [showStatus]="showAddCategory"></app-admin-categories-edit>
+
+    </div>
+
+    <!-- Lista cdkDropList dla kategorii -->
+    <div cdkDropList (cdkDropListDropped)="onCategoryDrop($event)"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+
+        @for (cat of categoriesService.categories(); track cat.id) {
+            <app-admin-categories-item [category]="cat" cdkDrag></app-admin-categories-item>
+        }
+    </div>
+</section>

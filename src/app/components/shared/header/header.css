@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+h1 img {
+  width: 30px;
+  display: inline-block;
+  margin-right: 10px;
+}

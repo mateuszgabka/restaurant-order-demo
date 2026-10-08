@@ -1,0 +1,26 @@
+:host {
+  min-height: calc(100vh - 115px);
+}
+
+.orders-wrapper {
+  max-height: 400px;
+}
+/* admin.css */
+.orders-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.orders-wrapper::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6); /* slate-900 z przezroczystością */
+  border-radius: 8px;
+}
+
+.orders-wrapper::-webkit-scrollbar-thumb {
+  background: #334155; /* slate-700 */
+  border-radius: 8px;
+}
+
+.orders-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #475569; /* slate-600 */
+}

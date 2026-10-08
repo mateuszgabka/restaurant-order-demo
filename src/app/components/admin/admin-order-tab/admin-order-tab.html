@@ -1,0 +1,93 @@
+<section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-xl font-bold text-slate-100 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                Lista Zamówień
+            </h2>
+            <p class="text-slate-400 text-sm mt-1">Zarządzaj bieżącymi zamówieniami i zmieniaj ich statusy</p>
+        </div>
+        <span class="px-3 py-1 bg-slate-800 border border-slate-700 text-xs text-slate-300 font-medium rounded-full">
+            Łącznie: {{ !isLoadingOrders() ? orders().length : '-' }}
+        </span>
+    </div>
+    <div
+        class="overflow-x-auto rounded-xl border border-slate-800 scrollbar-thumb-slate-900/60 scrollbar-track-slate-900/10 overflow-auto orders-wrapper">
+        <table class="w-full text-left border-collapse">
+            <thead class="sticky top-0 z-10 bg-slate-900">
+                <tr class="bg-slate-800/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
+                    <th class="p-4">ID / Date</th>
+                    <th class="p-4">Client</th>
+                    <th class="p-4">Dishes</th>
+                    <th class="p-4">Ammount</th>
+                    <th class="p-4">Status</th>
+                    <th class="p-4 text-right">Delete</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/80 text-sm">
+                @if(!isLoadingOrders()) {
+                @for (order of orders(); track order.id) {
+                <tr class="transition border-b border-slate-800/50 last:border-b-0" [ngClass]="{
+                    'bg-amber-500/10 hover:bg-amber-500/20': order.status === 'NEW',
+                    'bg-blue-500/10 hover:bg-blue-500/20': order.status === 'IN_PROGRESS',
+                    'bg-emerald-500/10 hover:bg-emerald-500/20': order.status === 'COMPLETED'
+                }">
+                    <td class="p-4 font-mono text-slate-300">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2.5 h-2.5 rounded-full shrink-0" [ngClass]="{
+                                'bg-amber-400 shadow-sm shadow-amber-400/50': order.status === 'NEW',
+                                'bg-blue-400 shadow-sm shadow-blue-400/50': order.status === 'IN_PROGRESS',
+                                'bg-emerald-400 shadow-sm shadow-emerald-400/50': order.status === 'COMPLETED'
+                            }"></span>
+                            <div>
+                                <span class="font-bold text-amber-500">#{{ order.id }}</span>
+                                <span class="block text-xs text-slate-500">{{ order.createdAt | date:'short' }}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="font-medium text-slate-200 block">{{ order.customer?.customer?.firstName }} {{
+                            order.customer?.customer?.lastName }}</span>
+                        <span class="text-xs text-slate-400 block">{{ order.customer?.customer?.phone }}</span>
+                    </td>
+
+                    <td class="p-4 text-slate-300">
+                        <span class="truncate block max-w-xs text-xs text-slate-400">
+                            <ul class="list-decimal pl-4">
+                                <li *ngFor="let item of order.items">{{
+                                    productService.getProductById(item.productId)?.name }} x {{
+                                    item.quantity }}</li>
+                            </ul>
+                        </span>
+                    </td>
+
+                    <td class="p-4 font-semibold text-slate-100">
+                        {{ order.totalAmount | currency: 'USD' }}
+                    </td>
+
+                    <td class="p-4">
+                        <select [ngModel]="order.status" (ngModelChange)="onStatusChange(order?.id!, $event)"
+                            class="bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold px-3 py-1.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/50 cursor-pointer">
+                            <option value="NEW" class="bg-slate-900 text-amber-400">New</option>
+                            <option value="IN_PROGRESS" class="bg-slate-900 text-blue-400">In progress</option>
+                            <option value="COMPLETED" class="bg-slate-900 text-emerald-400">Completed</option>
+                        </select>
+                    </td>
+                    <td class="p-4 text-right">
+                        <button (click)="onDeleteOrder(order?.id!)"
+                            class="p-2 text-slate-400 hover:text-red-400 hover:bg-slate-700/50 rounded-lg transition"
+                            title="Usuń">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                }
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
